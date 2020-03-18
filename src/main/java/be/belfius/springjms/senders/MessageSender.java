@@ -1,16 +1,15 @@
 package be.belfius.springjms.senders;
 
-import javax.jms.JMSException;
-import javax.jms.Message;
-import javax.jms.Session;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.jms.core.MessageCreator;
 import org.springframework.stereotype.Component;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Component
+@Slf4j
 public class MessageSender {
 	
 	@Autowired
@@ -20,7 +19,8 @@ public class MessageSender {
 	private String queue;
 	
 	public void send(String message) {
-//		jmsTemplate.convertAndSend(queue, message);
+		log.info("sending in project springjms");
+		jmsTemplate.convertAndSend(queue, message);
 		
 //		MessageCreator mc = new MessageCreator() {
 //
@@ -32,8 +32,8 @@ public class MessageSender {
 //			
 //		};
 //		jmsTemplate.send(queue, mc);
-	MessageCreator mc = s ->s.createTextMessage("Put your text here !");
-	jmsTemplate.send(queue, mc);
+//	MessageCreator mc = s ->s.createTextMessage("Put your text here !");
+//	jmsTemplate.send(queue, mc);
 	}
 
 }
